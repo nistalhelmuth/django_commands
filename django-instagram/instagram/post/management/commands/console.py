@@ -32,7 +32,7 @@ class Command(BaseCommand):
 
         elif(ans == '2'):
           registered_users = User.objects.all()
-          if (len(registered_users>0)):
+          if (len(registered_users)>0):
             for user in registered_users:
               print("pk={}: {} - {}".format(user.pk, user.first_name, user.email))
           else:
@@ -86,8 +86,8 @@ class Command(BaseCommand):
                     likes=UserLikePost.objects.filter(post=post.pk).count()
                     print("pk={}: {} ({})\n {} \n".format(post.pk, post.title, likes, post.content))
                   primary_k=input("Ingrese la llave primaria del post que va a borrar: ")
-                  post = Post.objects.get(pk=primary_k)
                   try:
+                    post = Post.objects.get(pk=primary_k)
                     post.delete()
                     print("Post eliminado")
                   except Exception as e:
